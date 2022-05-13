@@ -274,11 +274,20 @@ public class Player : MonoBehaviour
             _delayCount += Time.deltaTime;
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Invoke("jumpCoolDown", 0.1f);
-
-        if(_isSliding)
+        jumpCoolDown();
+        if (_isSliding)
         {
             if(collision.transform.gameObject.tag.Contains("Enemy"))
             {
@@ -314,7 +323,8 @@ public class Player : MonoBehaviour
         {
             _se.PlayJump();
             _jumpTrigger = true;
-            _rb.AddForce(Vector3.up * _jumpPower, ForceMode2D.Impulse);
+            if(_rb.velocity.y <= 10.0f)
+                _rb.AddForce(Vector3.up * _jumpPower, ForceMode2D.Impulse);
         }
     }
 

@@ -65,6 +65,10 @@ public class Boss5 : MonoBehaviour
 
     bool _isAppear = false;
 
+    [SerializeField] List<GameObject> _DamagedFire = null;
+    [SerializeField] GameObject _dieFx = null;
+    [SerializeField] AudioSource _dieSe = null;
+
     void Start()
     {
         _hp = _maxHp;
@@ -265,6 +269,8 @@ public class Boss5 : MonoBehaviour
             hpSlider.value = _hp;
         }
 
+        riseFire();
+
         if (_hp <= 0)
             Die();
         else
@@ -275,6 +281,27 @@ public class Boss5 : MonoBehaviour
                 if (_stunCo != null) StopCoroutine(_stunCo);
                 _stunCo = StartCoroutine("Stun");
             }
+        }
+    }
+
+    void riseFire()
+    {
+        int cnt = 0;
+
+        if (_hp >= _maxHp * 0.9f) cnt = 1;
+        else if (_hp >= _maxHp * 0.8f) cnt = 2;
+        else if (_hp >= _maxHp * 0.7f) cnt = 3;
+        else if (_hp >= _maxHp * 0.6f) cnt = 4;
+        else if (_hp >= _maxHp * 0.5f) cnt = 5;
+        else if (_hp >= _maxHp * 0.4f) cnt = 6;
+        else if (_hp >= _maxHp * 0.3f) cnt = 7;
+        else if (_hp >= _maxHp * 0.2f) cnt = 8;
+        else if (_hp >= _maxHp * 0.1f) cnt = 9;
+        else if (_hp < _maxHp * 0.1f) cnt = 10;
+
+        for (int i = 0; i < cnt; ++i)
+        {
+            _DamagedFire[i].SetActive(true);
         }
     }
 
@@ -308,6 +335,9 @@ public class Boss5 : MonoBehaviour
 
     void Die()
     {
+        _dieFx.SetActive(true);
+        _dieSe.Play();
+
         _isDie = true;
         _isStun = false;
         _isAttacking = false;

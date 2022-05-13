@@ -11,13 +11,26 @@ public class UpdateStageSelectWindow : MonoBehaviour
     [SerializeField] GameObject _stage3Lock = null;
     [SerializeField] GameObject _stage4 = null;
     [SerializeField] GameObject _stage4Lock = null;
+    [SerializeField] GameObject _stage5 = null;
+    [SerializeField] GameObject _stage5Lock = null;
 
     private void OnEnable()
     {
         string id = DataStreamToStage.Instance.getID();
         int currentMapID = PlayerPrefs.GetInt(id + "PlayerSetting_Level");
 
-        if (currentMapID >= 3)
+        if (currentMapID >= 4)
+        {
+            _stage2.SetActive(true);
+            _stage3.SetActive(true);
+            _stage4.SetActive(true);
+            _stage5.SetActive(true);
+            _stage2Lock.SetActive(false);
+            _stage3Lock.SetActive(false);
+            _stage4Lock.SetActive(false);
+            _stage5Lock.SetActive(false);
+        }
+        else if (currentMapID >= 3)
         {
             _stage2.SetActive(true);
             _stage3.SetActive(true);

@@ -20,6 +20,7 @@ public class Spiral : MonoBehaviour
     [SerializeField] AudioSource _hitSE = null;
     [SerializeField] AudioSource _painSE = null;
     [SerializeField] AudioSource _meleeSE = null;
+    [SerializeField] AudioSource _teleportSE = null;
     [SerializeField] bool _reverseFlip = false;
     [SerializeField] GameObject _hitFx = null;
     float _delayCount = 0.0f;
@@ -201,6 +202,7 @@ public class Spiral : MonoBehaviour
             int rnd_y = Random.Range(-10, 10);
 
             this.transform.position += new Vector3(rnd_x, rnd_y, 0.0f);
+            _teleportSE.Play();
         }
 
         _delayCount = 0.0f;
