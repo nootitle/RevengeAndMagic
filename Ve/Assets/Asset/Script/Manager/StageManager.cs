@@ -9,6 +9,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] GameObject _rewardWindow = null;
     [SerializeField] GameObject _boss = null;
     [SerializeField] GameObject _readySign = null;
+    [SerializeField] GameObject _cardCanvas = null;
 
     int killCount;
     public bool pause = false;
@@ -85,5 +86,14 @@ public class StageManager : MonoBehaviour
         offRewardWindow();
         StorageManager.Instance.updateGoldData();
         SceneManager.LoadScene(4);
+    }
+
+    public void showCardCanvas()
+    {
+        if (!_cardCanvas.activeSelf)
+        {
+            StageManager.Instance.pause = true;
+            _cardCanvas.SetActive(true);
+        }
     }
 }

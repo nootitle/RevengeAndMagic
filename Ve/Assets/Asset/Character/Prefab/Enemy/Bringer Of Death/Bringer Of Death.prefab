@@ -172,7 +172,7 @@ MonoBehaviour:
   _castFxLeft: {fileID: 1278840925534239532}
   _castFxRight: {fileID: 7356799919127344378}
   _duration: 5
-  _dropItem: {fileID: 66017646962753900, guid: 41b99f7cc15d7e24bad8cc0f5a5769a8, type: 3}
+  _dropItem: {fileID: 66017646962753900, guid: e3afedd4bf3109d4c9ddd899b244a41b, type: 3}
 --- !u!114 &4317064280078062504
 MonoBehaviour:
   m_ObjectHideFlags: 0

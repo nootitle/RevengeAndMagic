@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject SkillList;
     [SerializeField] float _jumpPower = 5.0f;
+    [SerializeField] float _jumpDelay = 1.0f;
     [SerializeField] float _sprintSpeed = 10.0f;
     [SerializeField] float _mapInterval = 30.0f;
     [SerializeField] float _maxHp = 100.0f;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     float _magicExtraDamage = 0.0f;
     public float _extraHeal = 0.0f;
     float _delayCount = 0.0f;
+    float _jumpCount = 0.0f;
 
     bool _jumpTrigger = false;
     bool _sprintTrigger = false;
@@ -155,6 +157,7 @@ public class Player : MonoBehaviour
         SkillList.SetActive(false);
         _rb = this.GetComponent<Rigidbody2D>();
         _hp = _maxHp;
+        _jumpCount = _jumpDelay;
 
         if(_SkillLevelList.Count == 0)
         {
@@ -272,6 +275,8 @@ public class Player : MonoBehaviour
 
         if (_delayCount < _attackDelay)
             _delayCount += Time.deltaTime;
+        if (_jumpCount < _jumpDelay)
+            _jumpCount += Time.deltaTime;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -319,12 +324,14 @@ public class Player : MonoBehaviour
 
     public void jump()
     {
-        if (!_jumpTrigger)
+        if (!_jumpTrigger && _jumpCount >= _jumpDelay)
         {
+            _pc.jump();
             _se.PlayJump();
             _jumpTrigger = true;
             if(_rb.velocity.y <= 10.0f)
                 _rb.AddForce(Vector3.up * _jumpPower, ForceMode2D.Impulse);
+            _jumpCount = 0.0f;
         }
     }
 

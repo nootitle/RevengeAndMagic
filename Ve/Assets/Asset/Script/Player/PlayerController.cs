@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
             else if (x > 0)
                 _sr.flipX = false;
             flip = _sr.flipX;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-                jump();
             Move(x, y);
         }  
     }
